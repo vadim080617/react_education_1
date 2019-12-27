@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableIndex } from 'typeorm';
 
 export class CreateUserTable1576838436655 implements MigrationInterface {
     async up(queryRunner: QueryRunner): Promise<any> {
@@ -8,7 +8,9 @@ export class CreateUserTable1576838436655 implements MigrationInterface {
                 {
                     name: "id",
                     type: "int",
-                    isPrimary: true
+                    isPrimary: true,
+                    isGenerated: true,
+                    generationStrategy: 'increment'
                 },
                 {
                     name: "name",
@@ -16,13 +18,21 @@ export class CreateUserTable1576838436655 implements MigrationInterface {
                 },
                 {
                     name: "created_at",
-                    type: "datetime"
+                    type: "timestamp",
+                    default: 'CURRENT_TIMESTAMP'
                 }
             ]
-        }), true)
+        }), true);
+
+        await queryRunner.createIndex("user", new TableIndex({
+            name: "IDX_USER_NAME",
+            isUnique: true,
+            columnNames: ["name"]
+        }));
     }
 
     async down(queryRunner: QueryRunner): Promise<any> {
+        await queryRunner.dropIndex("user", "IDX_USER_NAME");
         await queryRunner.dropTable("user");
     }
 }

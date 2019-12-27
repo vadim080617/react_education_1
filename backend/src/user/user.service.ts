@@ -25,7 +25,10 @@ export class UserService {
   }
 
   async createUser(createUserDto: CreateUserDto) {
-    console.log(createUserDto);
-    return await this.userRepository.create(createUserDto);
+    return await this.userRepository.save(createUserDto);
+  }
+
+  async deleteUser(id:number) {
+    return await this.userRepository.delete(id);
   }
 }
