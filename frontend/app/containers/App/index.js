@@ -12,6 +12,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import Users from 'containers/UsersPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -30,6 +31,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/users" component={Users} />
           <Route component={NotFoundPage} />
         </Switch>
         <GlobalStyle />

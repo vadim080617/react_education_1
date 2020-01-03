@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { handleActions, combineActions } from 'redux-actions';
+import { handleActions } from 'redux-actions';
 import { getUsers, getUsersFail, getUsersSucceed } from './actions';
 
 export const initialState = {
@@ -17,11 +17,13 @@ export const homeReducer = {
         produce(state, draft => {
           draft.loading = false;
           draft.users = [...state.users, ...payload.users];
-        }),
+        })
+      ,
       [getUsers]: (state = initialState, action) =>
         produce(state, draft => {
           draft.loading = true;
-        }),
+        })
+      ,
     },
     initialState,
   ),
