@@ -3,25 +3,29 @@ import { useInjectSaga } from '../../utils/injectSaga';
 import saga from './saga';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from './actions';
-import { usersSelector } from './selectors';
+import { usersSelector, loadingSelector } from './selectors';
 import UsersList from '../../components/Users/UsersList';
+import { remove } from '../../api/User';
 
 export function Users() {
   useInjectSaga(saga);
 
   const dispatch = useDispatch();
   const handleGetUsers = () => dispatch(getUsers());
+  const handleDeleteUsers = (id) => {
+    remove(id).then(() => dispatch(getUsers()));
+  };
 
   useEffect(() => {
-    console.log('useEffect');
     dispatch(getUsers());
   }, []);
 
   const users = useSelector(usersSelector);
+  const loading = useSelector(loadingSelector);
 
   return  (
     <div>
-      <UsersList users={users} onGetUsers={handleGetUsers}/>
+      <UsersList users={users} onDeleteUsers={handleDeleteUsers} onGetUsers={handleGetUsers} loading={loading}/>
     </div>
   );
 }

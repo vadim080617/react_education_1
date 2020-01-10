@@ -24,11 +24,8 @@ export const usersReducer = handleActions({
     }
     ,
     [getUsersSucceed]: (state = initialState, {payload: { users }}) => {
-      console.log(users);
-
       return produce(state, draft => {
         draft.users = users;
-        console.log('>>>', draft.users);
         draft.loading = false;
       });
     }

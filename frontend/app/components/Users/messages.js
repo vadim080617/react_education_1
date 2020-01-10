@@ -8,8 +8,16 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.UsersList';
 
 export default defineMessages({
-  getUsers: {
-    id: `${scope}.getUsers`,
-    defaultMessage: 'Get users.',
+  submit: {
+    id: `${scope}.submit`,
+    defaultMessage: 'Submit',
+  },
+  addUser: {
+    id: `${scope}.addUser`,
+    defaultMessage: 'Add user',
+  },
+  editUser: {
+    id: `${scope}.editUser`,
+    defaultMessage: 'Edit user',
   },
 });
