@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useInjectSaga } from '../../utils/injectSaga';
 import saga from './saga';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,10 +11,13 @@ export function Users() {
   useInjectSaga(saga);
 
   const dispatch = useDispatch();
-  const handleGetUsers = () => dispatch(getUsers());
-  const handleDeleteUsers = (id) => {
-    remove(id).then(() => dispatch(getUsers()));
-  };
+  const handleGetUsers = useCallback(() => dispatch(getUsers()), []);
+  const handleDeleteUsers = useCallback(
+    async (id) => {
+      await remove(id);
+      dispatch(getUsers());
+    }, []
+  );
 
   useEffect(() => {
     dispatch(getUsers());

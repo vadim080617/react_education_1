@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import {useParams, useHistory} from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
@@ -7,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useFormik } from 'formik';
-import { edit, show } from '../../api/User';
 
 const validate = values => {
   const errors = {};
@@ -21,20 +19,7 @@ const validate = values => {
   return errors;
 };
 
-export function UsersEdit() {
-  const { id } = useParams();
-  const history = useHistory();
-  const [name, setName] = useState('');
-
-  useEffect(() => {
-    show(id).then(data => setName(data.name));
-  }, []);
-
-  async function onSubmit(data) {
-    await edit(id, data);
-    history.push('/users');
-  }
-
+export function UsersEdit({ onSubmit, name}) {
   const formik = useFormik({
     initialValues: {
       name,

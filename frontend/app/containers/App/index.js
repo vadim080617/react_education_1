@@ -12,8 +12,7 @@ import { Switch, Route, Link, useLocation } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Users from 'containers/UsersPage/Loadable';
-import UsersAdd from 'components/Users/UsersAdd';
-import UsersEdit from 'components/Users/UsersEdit';
+import UsersEdit from 'containers/UserEdit';
 
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -210,7 +209,7 @@ export default function App({ match }) {
          <Switch>
            <Route exact path="/" component={HomePage} />
            <Route exact path="/users" component={Users} />
-           <Route exact path="/users/add" component={UsersAdd} />
+           <Route exact path="/users/add" component={UsersEdit} />
            <Route exact path="/users/edit/:id" component={UsersEdit} />
            <Route component={NotFoundPage} />
          </Switch>
