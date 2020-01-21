@@ -11,7 +11,7 @@ import { Switch, Route, Link, useLocation } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Users from 'containers/UsersPage/Loadable';
+import Users from 'containers/UsersPage/index2';
 import UsersEdit from 'containers/UserEdit';
 
 import clsx from 'clsx';

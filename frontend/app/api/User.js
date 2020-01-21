@@ -1,5 +1,13 @@
 const apiUrl = 'http://localhost:3001';
 
+export const index = async () => {
+    const response = await fetch(`${apiUrl}/users`);
+
+    const responseBody = await response.json();
+
+    return responseBody;
+};
+
 export const store = async (data) => {
     const response = await fetch(`${apiUrl}/users`, {
         method: 'POST',
